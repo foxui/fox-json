@@ -1,0 +1,34 @@
+<fox-element name="fox-json" attributes="json">
+
+    <script>
+
+		fox('fox-json', {
+			lifecycle : {
+
+				jsonChanged : function(oldVal, newVal) {
+					fox.fireEvent(this, 'data-change', {
+						'detail' : {
+							oldVal : oldVal,
+							newVal : newVal
+						}
+					});
+				}
+			},
+
+            methods: {
+                getValue: function() {
+                    return JSON.parse(this.json);
+                },
+
+                setValue: function(jsonObj) {
+
+                    if (jsonObj) {
+                        this.json = JSON.stringify(jsonObj);
+                    }
+                }
+            }
+
+		});
+    </script>
+
+</fox-element>
