@@ -1,0 +1,21 @@
+<fox-element name="fox-json" attributes="data">
+
+    <script>
+        
+		fox("fox-json", {
+			lifecycle : {
+
+				dataChanged : function() {
+					xtag.fireEvent(this, 'dataChanged', {
+						'detail' : {
+							oldVal : oldVal,
+							newVal : newVal
+						}
+					});
+				}
+			}
+
+		});
+    </script>
+
+</fox-element>
