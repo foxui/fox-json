@@ -33,42 +33,12 @@ module.exports = function(grunt) {
       dist: ['<%= meta.distPath %>']
     },
 
-    concat: {
-      foxui: {
-        options: {
-          banner: '<%= banner %>'
-        },
-        src: [
-          'src/*.js',
-        ],
-        dest: '<%= meta.distPath %><%= pkg.name %>.js'
-      }
-    },
-
     copy: {
-      fonts: {
-        expand: true,
-        src: 'fonts/*',
-        dest: '<%= meta.distPath %>'
-      },
       tags: {
         expand: true,
         cwd: 'src/',
         src: '*.html',
         dest: '<%= meta.distPath %>'
-      }
-    },
-
-    uglify: {
-      options: {
-        banner: '<%= banner %>',
-        compress: true,
-        mangle: true,
-        preserveComments: false
-      },
-      foxui: {
-        src: '<%= concat.foxui.dest %>',
-        dest: '<%= meta.distPath %><%= pkg.name %>.min.js'
       }
     },
 
@@ -91,7 +61,6 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   // Default task(s).
-  grunt.registerTask('dist-js', ['concat', 'uglify']);
   grunt.registerTask('dist', ['clean', 'copy']);
   grunt.registerTask('build', ['dist']);
   grunt.registerTask('default', ['dist']);

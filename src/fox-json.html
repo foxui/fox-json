@@ -4,6 +4,10 @@
 
 		fox('fox-json', {
 			lifecycle : {
+                created: function() {
+                    // property
+                    this.data = this.getValue();
+                },
 
 				jsonChanged : function(oldVal, newVal) {
 					fox.fireEvent(this, 'data-change', {
@@ -12,6 +16,9 @@
 							newVal : newVal
 						}
 					});
+
+                    // property
+                    this.data = this.getValue();
 				}
 			},
 
