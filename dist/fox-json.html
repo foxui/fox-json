@@ -2,25 +2,31 @@
 
     <script>
 
-		fox('fox-json', {
-			lifecycle : {
+        function fireChange(oldVal, newVal) {
+            fox.fireEvent(this, 'data-change', {
+                'detail' : {
+                    oldVal : oldVal,
+                    newVal : newVal
+                }
+            });
+        }
+
+        fox('fox-json', {
+            lifecycle : {
                 created: function() {
                     // property
                     this.data = this.getValue();
+                    fireChange.apply(this, [null, this.data]);
                 },
 
-				jsonChanged : function(oldVal, newVal) {
-					fox.fireEvent(this, 'data-change', {
-						'detail' : {
-							oldVal : oldVal,
-							newVal : newVal
-						}
-					});
+                jsonChanged : function(oldVal, newVal) {
+                    oldVal = this.data;
 
                     // property
                     this.data = this.getValue();
-				}
-			},
+                    fireChange.apply(this, [oldVal, this.data]);
+                }
+            },
 
             methods: {
                 getValue: function() {
@@ -35,7 +41,7 @@
                 }
             }
 
-		});
+        });
     </script>
 
 </fox-element>
